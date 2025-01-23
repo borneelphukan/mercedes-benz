@@ -1,19 +1,13 @@
-import React, { KeyboardEvent } from "react";
 import "../../styles/ui/SearchBar.css";
 
-interface SearchBarProps {
+type Props = {
   query: string;
   setQuery: (query: string) => void;
   placeholder?: string;
   mode?: string;
-}
+};
 
-const SearchBar: React.FC<SearchBarProps> = ({
-  query,
-  setQuery,
-  placeholder = "",
-  mode = "",
-}) => {
+const SearchBar = ({ query, setQuery, placeholder = "", mode = "" }: Props) => {
   if (mode === "table" && !placeholder) {
     throw new Error(
       "The 'placeholder' parameter is mandatory when 'mode' is set to 'table'."
@@ -23,12 +17,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const effectivePlaceholder =
     mode === "type" && !placeholder ? "Search" : placeholder;
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      console.log("Search triggered with query:", query);
-    }
-  };
-
   return (
     <div className="search-bar-container">
       <input
@@ -37,7 +25,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         placeholder={effectivePlaceholder}
         className="search-bar-input"
         onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyDown}
       />
       <button
         className="search-bar-button"

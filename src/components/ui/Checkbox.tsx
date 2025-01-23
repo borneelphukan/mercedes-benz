@@ -1,13 +1,12 @@
-import React from "react";
 import "../../styles/ui/Checkbox.css";
 
-interface CheckboxProps {
+type Props = {
   label: string;
   checked: boolean;
   onChange: () => void;
-}
+};
 
-const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange }) => {
+const Checkbox = ({ label, checked, onChange }: Props) => {
   return (
     <label className="checkbox-container">
       <input

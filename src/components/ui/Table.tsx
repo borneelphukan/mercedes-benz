@@ -4,18 +4,14 @@ import SearchBar from "./SearchBar";
 import Checkbox from "./Checkbox";
 import Button from "./Button";
 
-interface TableProps {
+type Props = {
   data: { columns: string[]; rows: any[][] };
   totalRecordCount: number;
   view: string;
   paginationItems: string[];
-}
+};
 
-const Table: React.FC<TableProps> = ({
-  data,
-  totalRecordCount,
-  paginationItems,
-}) => {
+const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortColumn, setSortColumn] = useState<number | null>(null);
@@ -39,19 +35,22 @@ const Table: React.FC<TableProps> = ({
     )
   );
 
-  const handleCheckboxChange = (key: string) => {
+  // Click checkbox to hide/show columns
+  const checkboxChange = (key: string) => {
     setVisibleColumns((prev: Record<string, boolean>) => ({
       ...prev,
       [key]: !prev[key],
     }));
   };
 
+  // filtering based on searchbar
   const filteredRows = data.rows.filter((row) =>
     row.some((cell) =>
       cell.toString().toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
 
+  // sorting
   const toggleSort = (columnIndex: number) => {
     if (sortColumn === columnIndex) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -71,27 +70,35 @@ const Table: React.FC<TableProps> = ({
     if (valueA === null || valueB === null) return 0;
 
     if (typeof valueA === "string" && typeof valueB === "string") {
-      return sortOrder === "asc"
-        ? valueA.localeCompare(valueB)
-        : valueB.localeCompare(valueA);
+      if (sortOrder === "asc") {
+        return valueA.localeCompare(valueB);
+      } else {
+        return valueB.localeCompare(valueA);
+      }
     }
     if (typeof valueA === "number" && typeof valueB === "number") {
-      return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
+      if (sortOrder === "asc") {
+        return valueA - valueB;
+      } else {
+        return valueB - valueA;
+      }
     }
     return 0;
   });
 
+  // Number of items to be displayed per page
   const handleItemsPerPageChange = (selected: string) => {
     const items = parseInt(selected.split(" ")[0], 10);
     setItemsPerPage(items);
     setCurrentPage(1);
   };
 
-  const highlightMatches = (text: string, query: string): React.ReactNode => {
-    if (!query) return text; // If there's no search query, return the text as is
+  // Any matches from the Search Bar are highlighed in yellow
+  const highlight = (text: string, query: string): React.ReactNode => {
+    if (!query) return text;
 
-    const regex = new RegExp(`(${query})`, "gi"); // Create a case-insensitive regex
-    const parts = text.split(regex); // Split the text into matched and unmatched parts
+    const regex = new RegExp(`(${query})`, "gi");
+    const parts = text.split(regex);
 
     return parts.map((part, index) =>
       regex.test(part) ? (
@@ -113,7 +120,7 @@ const Table: React.FC<TableProps> = ({
               key={`column${index + 1}`}
               label={column}
               checked={visibleColumns[`column${index + 1}`]}
-              onChange={() => handleCheckboxChange(`column${index + 1}`)}
+              onChange={() => checkboxChange(`column${index + 1}`)}
             />
           ))}
         </div>
@@ -193,7 +200,7 @@ const Table: React.FC<TableProps> = ({
                       visibleColumns[`column${cellIndex + 1}`] && (
                         <td key={cellIndex}>
                           {typeof cell === "string" || typeof cell === "number"
-                            ? highlightMatches(cell.toString(), searchQuery)
+                            ? highlight(cell.toString(), searchQuery)
                             : cell}
                         </td>
                       )
@@ -219,7 +226,7 @@ const Table: React.FC<TableProps> = ({
           <tbody>
             <tr>
               <td colSpan={data.columns.length} className="no-records">
-                ⚠️ Record(s) not Found
+                ⚠️ No Data Exist
               </td>
             </tr>
           </tbody>
