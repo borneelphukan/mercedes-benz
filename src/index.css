@@ -1,0 +1,40 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --highlight-color: #06b6d4;
+  --navbar-bg-color: #f8f9fa;
+  --footer-bg-color: #f8f9fa;
+  --toggle-btn-bg: #ebecec;
+  --toggle-icon-color: #1a202c;
+}
+
+[data-theme="dark"] {
+  --bg-color: #2d3748;
+  --text-color: #ffffff;
+  --highlight-color: #06b6d4;
+  --navbar-bg-color: #1a202c;
+  --footer-bg-color: #1a202c;
+  --toggle-btn-bg: #404753;
+  --toggle-icon-color: #ffffff;
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.default-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}

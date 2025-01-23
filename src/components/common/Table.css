@@ -1,0 +1,142 @@
+:root {
+  --home-bg-color: #eeeeee;
+  --home-text-color: #000000;
+}
+
+[data-theme="dark"] {
+  --home-bg-color: #2d3748;
+  --home-text-color: #ffffff;
+}
+
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  margin-right: -0.5rem;
+}
+
+.search-bar {
+  width: 50%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.delete-button,
+.export-button {
+  margin-left: 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.05rem;
+}
+
+.table th {
+  border: 1px solid #b3b3b3;
+  padding: 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  background: var(--home-bg-color);
+  color: var(--home-text-color);
+  align-items: center;
+  gap: 2rem;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2),
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  width: 12%;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 15%;
+}
+
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  width: 18%;
+}
+.table th:nth-child(6),
+.table td:nth-child(6) {
+  width: 15%;
+}
+
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  width: 6%;
+}
+
+.sortable-column .arrow {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  width: 1rem;
+  height: 1rem;
+}
+
+.table td {
+  border: 1px solid #b3b3b3;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.sortable-column {
+  cursor: pointer;
+}
+
+.no-records {
+  text-align: center;
+  padding: 1rem;
+  color: #999;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.pagination-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pagination button {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+}
+
+.pagination select {
+  padding: 0.3rem;
+  font-size: 0.9rem;
+}
+
+/* Added styles for checkbox group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--home-text-color);
+}
+
+.checkbox-group input {
+  margin-right: 0.5rem;
+}

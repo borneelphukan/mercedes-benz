@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Audi",
+      "label": "Engine Type",
+      "category": "Specifications",
+      "system_value": "V8",
+      "user_value": "V6",
+      "note": "User prefers better fuel efficiency."
+    },
+    {
+      "id": 2,
+      "name": "BMW",
+      "label": "Color",
+      "category": "Appearance",
+      "system_value": "Red",
+      "user_value": "Blue",
+      "note": "User prefers less flashy colors."
+    },
+    {
+      "id": 3,
+      "name": "VW",
+      "label": "Seating Capacity",
+      "category": "Interior",
+      "system_value": "5",
+      "user_value": "7",
+      "note": "User needs extra seating for family trips."
+    },
+    {
+      "id": 4,
+      "name": "Ford",
+      "label": "Fuel Type",
+      "category": "Performance",
+      "system_value": "Diesel",
+      "user_value": "Petrol",
+      "note": "User prefers smoother engine noise."
+    },
+    {
+      "id": 5,
+      "name": "Jeep",
+      "label": "Wheel Size",
+      "category": "Specifications",
+      "system_value": "18 inches",
+      "user_value": "20 inches",
+      "note": "User wants a sportier look."
+    },
+    {
+      "id": 6,
+      "name": "Jeep",
+      "label": "Wheel Size",
+      "category": "Specifications",
+      "system_value": "18 inches",
+      "user_value": "20 inches",
+      "note": "User wants a sportier look."
+    }
+  ]
+}
