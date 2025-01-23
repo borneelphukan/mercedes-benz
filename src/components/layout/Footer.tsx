@@ -1,9 +1,5 @@
-import { useTheme } from "../../utilities/ThemeContext";
-import "./Footer.css";
-
+import "../../styles/layout/Footer.css";
 const Footer = () => {
-  const { theme } = useTheme();
-
   return (
     <footer className="footer">
       <p>

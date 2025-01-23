@@ -1,5 +1,5 @@
 import { useTheme } from "../../utilities/ThemeContext";
-import "./Navbar.css";
+import "../../styles/layout/Navbar.css";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();

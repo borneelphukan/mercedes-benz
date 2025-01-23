@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import "./Home.css";
+import "../styles/pages/Home.css";
 import { useTheme } from "../utilities/ThemeContext";
-import Table from "../components/common/Table";
+import Table from "../components/ui/Table";
 
 const Home = () => {
   const { theme } = useTheme();
   const [data, setData] = useState<{ columns: string[]; rows: any[][] } | null>(
     null
   );
-  const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState<string | null>(null);
 
   const paginationItems = ["5 per page", "10 per page", "15 per page"];
@@ -23,7 +23,7 @@ const Home = () => {
         const json = await response.json();
 
         // Transform the JSON data into the required format
-        const transformedData = {
+        const data = {
           columns: [
             "ID",
             "Name",
@@ -44,20 +44,14 @@ const Home = () => {
           ]),
         };
 
-        setData(transformedData);
+        setData(data);
       } catch (err: any) {
         setError(err.message);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
-
-  if (loading) {
-    return <div className={`home-container ${theme}`}>Loading...</div>;
-  }
 
   if (error) {
     return (

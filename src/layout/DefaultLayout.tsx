@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-import Loader from "../components/common/Loader";
+import Loader from "../components/ui/Loader";
 import "../index.css";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {

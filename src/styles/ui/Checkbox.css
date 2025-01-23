@@ -1,0 +1,57 @@
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--home-text-color);
+  cursor: pointer; /* Makes the label clickable */
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px; /* Adds slight rounding to the label background */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.custom-checkbox {
+  appearance: none; /* Removes the default checkbox styling */
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem; /* Adds space between the checkbox and label text */
+  border: 2px solid var(--home-text-color); /* Border color based on the theme */
+  border-radius: 2px; /* Adds a slight rounding to the checkbox */
+  background-color: var(
+    --home-bg-color
+  ); /* Matches the checkbox background with the theme */
+  position: relative; /* Required for the tick symbol */
+  cursor: pointer; /* Makes the checkbox interactive */
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover and checked effects */
+}
+
+.custom-checkbox:checked {
+  background-color: #3182ce; /* Blue background for the checked state */
+  border-color: #3182ce; /* Matches the border color to the background */
+}
+
+.custom-checkbox:checked::after {
+  content: "✓"; /* Tick symbol */
+  position: absolute; /* Positioned within the checkbox */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Tick color */
+  font-size: 0.8rem; /* Tick size */
+}
+
+.custom-checkbox:hover {
+  border-color: #3182ce; /* Border color changes on hover */
+}
+
+.custom-checkbox:focus {
+  outline: 2px solid #63b3ed; /* Adds a focus outline */
+}
+
+.checkbox-container:hover {
+  background-color: #e2e8f0; /* Adds a light gray background when hovering over the label */
+  color: #2d3748; /* Darkens the label text color on hover */
+}
