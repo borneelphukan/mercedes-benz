@@ -14,7 +14,7 @@ const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange }) => {
         type="checkbox"
         checked={checked}
         onChange={onChange}
-        className="custom-checkbox"
+        className="checkbox"
       />
       {label}
     </label>

@@ -47,12 +47,93 @@
     },
     {
       "id": 6,
-      "name": "Jeep",
-      "label": "Wheel Size",
+      "name": "Mercedes",
+      "label": "Interior Material",
+      "category": "Interior",
+      "system_value": "Leather",
+      "user_value": "Fabric",
+      "note": "User prefers non-leather materials."
+    },
+    {
+      "id": 7,
+      "name": "Tesla",
+      "label": "Battery Range",
+      "category": "Performance",
+      "system_value": "350 km",
+      "user_value": "400 km",
+      "note": "User needs a longer range for road trips."
+    },
+    {
+      "id": 8,
+      "name": "Toyota",
+      "label": "Infotainment System",
+      "category": "Technology",
+      "system_value": "Basic",
+      "user_value": "Advanced",
+      "note": "User wants a system with more features."
+    },
+    {
+      "id": 9,
+      "name": "Nissan",
+      "label": "Drive Type",
       "category": "Specifications",
-      "system_value": "18 inches",
-      "user_value": "20 inches",
-      "note": "User wants a sportier look."
+      "system_value": "Front Wheel Drive",
+      "user_value": "All Wheel Drive",
+      "note": "User needs better traction for snowy regions."
+    },
+    {
+      "id": 10,
+      "name": "Hyundai",
+      "label": "Safety Features",
+      "category": "Safety",
+      "system_value": "Standard",
+      "user_value": "Enhanced",
+      "note": "User prioritizes advanced safety systems."
+    },
+    {
+      "id": 11,
+      "name": "Kia",
+      "label": "Warranty",
+      "category": "Warranty",
+      "system_value": "5 years",
+      "user_value": "7 years",
+      "note": "User wants a longer warranty for peace of mind."
+    },
+    {
+      "id": 12,
+      "name": "Honda",
+      "label": "Headlights",
+      "category": "Appearance",
+      "system_value": "Halogen",
+      "user_value": "LED",
+      "note": "User prefers brighter and energy-efficient lighting."
+    },
+    {
+      "id": 13,
+      "name": "Chevrolet",
+      "label": "Tire Type",
+      "category": "Specifications",
+      "system_value": "All-Season",
+      "user_value": "Performance",
+      "note": "User wants tires optimized for high speeds."
+    },
+    {
+      "id": 14,
+      "name": "Porsche",
+      "label": "Spoiler",
+      "category": "Appearance",
+      "system_value": "None",
+      "user_value": "Included",
+      "note": "User prefers a sporty look."
+    },
+    {
+      "id": 15,
+      "name": "Mazda",
+      "label": "Sound System",
+      "category": "Technology",
+      "system_value": "Standard",
+      "user_value": "Bose",
+      "note": "User prefers a premium audio experience."
     }
   ]
 }
