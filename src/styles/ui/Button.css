@@ -1,3 +1,19 @@
+:root {
+  --button-bg-color: transparent;
+  --button-text-color: black;
+  --button-hover-bg: rgba(0, 0, 0, 0.1);
+  --button-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --button-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] {
+  --button-bg-color: transparent;
+  --button-text-color: white;
+  --button-hover-bg: rgba(255, 255, 255, 0.1);
+  --button-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  --button-hover-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -5,24 +21,21 @@
   font-size: 1rem;
   font-weight: 600;
   border-radius: 0.25rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+  transition: background-color 0.3s, opacity 0.3s, color 0.3s;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+}
+
+.button:hover {
+  background-color: var(--button-hover-bg);
 }
 
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-}
-
-.button.primary {
-  background-color: #2d87ef00;
-  color: #fff;
-  border: none;
-}
-
-.button.primary:hover {
-  background-color: #ffffff23;
 }
 
 .icon {

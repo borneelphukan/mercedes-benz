@@ -240,7 +240,6 @@ const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
           <Button
             text="Prev"
             arrow="left"
-            style="primary"
             isDisabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           />
@@ -249,7 +248,6 @@ const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
           <Button
             text="Next"
             arrow="right"
-            style="primary"
             isDisabled={
               currentPage === Math.ceil(totalRecordCount / itemsPerPage)
             }
