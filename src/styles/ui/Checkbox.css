@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   font-size: 0.9rem;
-  color: var(--home-text-color);
+  color: var(--text-color);
   cursor: pointer; /* Makes the label clickable */
   padding: 0.2rem 0.5rem;
   border-radius: 4px; /* Adds slight rounding to the label background */
@@ -14,7 +14,7 @@
   width: 1rem;
   height: 1rem;
   margin-right: 0.5rem; /* Adds space between the checkbox and label text */
-  border: 1px solid var(--home-text-color); /* Border color based on the theme */
+  border: 1px solid var(--text-color); /* Border color based on the theme */
   border-radius: 2px; /* Adds a slight rounding to the checkbox */
   background-color: var(
     --home-bg-color

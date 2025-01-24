@@ -1,17 +1,7 @@
-:root {
-  --home-bg-color: #eeeeee;
-  --home-text-color: #000000;
-}
-
-[data-theme="dark"] {
-  --home-bg-color: #2d3748;
-  --home-text-color: #ffffff;
-}
-
 .home-container {
   padding: 2rem;
   text-align: center;
-  color: var(--home-text-color);
+  color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
 }
 

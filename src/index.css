@@ -2,20 +2,40 @@
   --bg-color: #ffffff;
   --text-color: #000000;
   --highlight-color: #06b6d4;
-  --navbar-bg-color: #f8f9fa;
-  --footer-bg-color: #f8f9fa;
+  --layout-bg-color: #f8f9fa;
   --toggle-btn-bg: #ebecec;
   --toggle-icon-color: #1a202c;
+  --home-bg-color: #eeeeee;
+  --home-highlight-color: #000000;
+  --button-bg-color: transparent;
+  --button-text-color: black;
+  --button-hover-bg: rgba(0, 0, 0, 0.1);
+  --button-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --button-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --table-row-bg: #ffffff;
+  --table-row-alt-bg: #f9f9f9;
 }
 
 [data-theme="dark"] {
   --bg-color: #2d3748;
   --text-color: #ffffff;
   --highlight-color: #06b6d4;
-  --navbar-bg-color: #1a202c;
-  --footer-bg-color: #1a202c;
+  --layout-bg-color: #1a202c;
   --toggle-btn-bg: #404753;
   --toggle-icon-color: #ffffff;
+  --home-bg-color: #2d3748;
+  --home-highlight-color: #000000;
+  --button-bg-color: transparent;
+  --button-text-color: white;
+  --button-hover-bg: rgba(255, 255, 255, 0.1);
+  --button-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  --button-hover-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+  --table-row-bg: #3b4252;
+  --table-row-alt-bg: #2d3748;
+}
+
+[data-theme="dark"] .navbar-logo img {
+  filter: invert(1);
 }
 
 body {

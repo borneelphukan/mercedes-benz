@@ -8,9 +8,7 @@ const Navbar = () => {
     <header className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <h2 className="brand">
-            <span className="brand-highlight">Mercedes</span>Benz
-          </h2>
+          <img src="mercedes-benz.svg"/>
         </div>
         <button onClick={toggleTheme} className="theme-toggle-btn">
           {theme === "light" ? (
