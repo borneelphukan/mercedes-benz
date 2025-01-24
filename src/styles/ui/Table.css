@@ -12,109 +12,6 @@
   margin-right: -0.5rem;
 }
 
-.search-bar {
-  width: 50%;
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
-.delete-button,
-.export-button {
-  margin-left: 1rem;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 0.05rem;
-}
-
-.table td {
-  border-top: 0.5px solid #b3b3b3;
-  border-bottom: 0.5px solid #b3b3b3;
-  border-left: none;
-  border-right: none;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  text-align: left;
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
-
-.table th {
-  border: none;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  text-align: left;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  background: var(--home-bg-color);
-  color: var(--text-color);
-  align-items: center;
-  gap: 2rem;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.table th:hover {
-  background-color: #b8b8b8;
-  color: #000;
-}
-
-[data-theme="dark"] .table th:hover {
-  background-color: #5a6474;
-  color: #fff;
-}
-
-.table th:focus {
-  background-color: #e0e0e0;
-  outline: 2px solid #007bff;
-  color: #000;
-}
-
-[data-theme="dark"] .table th:focus {
-  background-color: #2d3748;
-  outline: 2px solid #3182ce;
-  color: #fff;
-}
-
-.table tr:nth-child(even) {
-  background-color: var(--table-row-alt-bg);
-}
-
-.table tr:nth-child(odd) {
-  background-color: var(--table-row-bg);
-}
-
-.table th:nth-child(2),
-.table td:nth-child(2),
-.table th:nth-child(3),
-.table td:nth-child(3) {
-  width: 12%;
-}
-
-.table th:nth-child(4),
-.table td:nth-child(4) {
-  width: 15%;
-}
-
-.table th:nth-child(5),
-.table td:nth-child(5) {
-  width: 18%;
-}
-.table th:nth-child(6),
-.table td:nth-child(6) {
-  width: 15%;
-}
-
-.table th:nth-child(1),
-.table td:nth-child(1) {
-  width: 6%;
-}
-
 .sortable-column .arrow {
   display: inline-flex;
   align-items: center;
@@ -129,8 +26,11 @@
 
 .no-records {
   text-align: center;
-  padding: 1rem;
-  color: #999;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #999999;
 }
 
 .pagination {

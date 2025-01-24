@@ -17,7 +17,7 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="default-layout">
+        <div className="layout">
           <Navbar />
           <main>{children}</main>
           <Footer />
