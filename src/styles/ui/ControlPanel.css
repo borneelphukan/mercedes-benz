@@ -1,0 +1,23 @@
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  margin-right: -0.5rem;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-right: 1rem;
+  align-items: center;
+}
+
+.search-bar {
+  flex: 1;
+}
+
+.highlight {
+  background-color: yellow;
+  color: var(--home-highlight-color);
+}

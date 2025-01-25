@@ -7,7 +7,7 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   background-color: var(--button-bg-color);
-  color: var(--button-text-color);
+  color: var(--text-color);
   border: none;
 }
 

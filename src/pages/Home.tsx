@@ -68,7 +68,6 @@ const Home = () => {
           <Table
             data={data}
             totalRecordCount={data.rows.length}
-            view="contacts"
             paginationItems={paginationItems}
           />
         )}

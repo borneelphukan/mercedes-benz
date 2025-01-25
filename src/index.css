@@ -28,11 +28,11 @@ table {
 }
 
 tr:nth-child(even) {
-  background-color: var(--table-row-alt-bg);
+  background-color: var(--even-row-bg);
 }
 
 tr:nth-child(odd) {
-  background-color: var(--table-row-bg);
+  background-color: var(--odd-row-bg);
 }
 
 th {
@@ -44,14 +44,14 @@ th {
   text-align: left;
   font-size: 0.9rem;
   text-transform: uppercase;
-  background: var(--home-bg-color);
   color: var(--text-color);
+  background-color: var(--table-header-bg);
   align-items: center;
   gap: 2rem;
 }
 
 th:hover {
-  background-color: #d1d0d0;
+  background-color: #aeaeae;
   color: #000;
 }
 

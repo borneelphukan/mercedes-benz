@@ -7,7 +7,6 @@ import Button from "./Button";
 type Props = {
   data: { columns: string[]; rows: any[][] };
   totalRecordCount: number;
-  view: string;
   paginationItems: string[];
 };
 
