@@ -2,13 +2,21 @@ import { useEffect, useState } from "react";
 import "../styles/pages/Home.css";
 import { useTheme } from "../utilities/ThemeContext";
 import Table from "../components/ui/Table";
+import Pagination from "../components/ui/Pagination";
+import SearchBar from "../components/ui/SearchBar";
+import Checkbox from "../components/ui/Checkbox";
 
 const Home = () => {
   const { theme } = useTheme();
   const [data, setData] = useState<{ columns: string[]; rows: any[][] } | null>(
     null
   );
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [visibleColumns, setVisibleColumns] = useState<Record<string, boolean>>(
+    {}
+  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [error, setError] = useState<string | null>(null);
 
   const paginationItems = ["5 per page", "10 per page", "15 per page"];
@@ -22,7 +30,14 @@ const Home = () => {
         }
         const json = await response.json();
 
-        // Transform the JSON data into the required format
+        const defaultSelectedColumns = [
+          "Label",
+          "Category",
+          "System Value",
+          "User Value",
+          "Note",
+        ];
+
         const data = {
           columns: [
             "ID",
@@ -45,6 +60,14 @@ const Home = () => {
         };
 
         setData(data);
+
+        // Initialize visible columns
+        setVisibleColumns(
+          data.columns.reduce((acc: Record<string, boolean>, col, index) => {
+            acc[`column${index + 1}`] = defaultSelectedColumns.includes(col);
+            return acc;
+          }, {})
+        );
       } catch (err: any) {
         setError(err.message);
       }
@@ -52,6 +75,33 @@ const Home = () => {
 
     fetchData();
   }, []);
+
+  const handleCheckboxChange = (key: string) => {
+    setVisibleColumns((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
+  const handleItemsPerPageChange = (selected: string) => {
+    const items = parseInt(selected.split(" ")[0], 10);
+    setItemsPerPage(items);
+    setCurrentPage(1);
+  };
+
+  const paginatedData = data
+    ? {
+        ...data,
+        rows: data.rows.slice(
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
+        ),
+      }
+    : null;
 
   if (error) {
     return (
@@ -63,15 +113,47 @@ const Home = () => {
 
   return (
     <div className={`home-container ${theme}`}>
+      <div className="filter-container">
+        <div className="checkbox-group">
+          {data?.columns.map((column, index) => (
+            <Checkbox
+              key={`column${index + 1}`}
+              label={column}
+              checked={visibleColumns[`column${index + 1}`]}
+              onChange={() => handleCheckboxChange(`column${index + 1}`)}
+            />
+          ))}
+        </div>
+        <SearchBar
+          query={searchQuery}
+          setQuery={setSearchQuery}
+          placeholder="Search"
+          mode="type"
+        />
+      </div>
+
       <div className="home-content">
-        {data && (
+        {paginatedData && (
           <Table
-            data={data}
-            totalRecordCount={data.rows.length}
-            paginationItems={paginationItems}
+            data={paginatedData}
+            visibleColumns={visibleColumns}
+            searchQuery={searchQuery}
           />
         )}
       </div>
+
+      {data && (
+        <div className="pagination-container">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(data.rows.length / itemsPerPage)}
+            itemsPerPage={itemsPerPage}
+            paginationItems={paginationItems}
+            onPageChange={handlePageChange}
+            onItemsPerPageChange={handleItemsPerPageChange}
+          />
+        </div>
+      )}
     </div>
   );
 };

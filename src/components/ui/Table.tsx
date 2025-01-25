@@ -1,48 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../../styles/ui/Table.css";
-import SearchBar from "./SearchBar";
-import Checkbox from "./Checkbox";
-import Button from "./Button";
 
 type Props = {
   data: { columns: string[]; rows: any[][] };
-  totalRecordCount: number;
-  paginationItems: string[];
+  visibleColumns: Record<string, boolean>;
+  searchQuery: string;
 };
 
-const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
-  const [searchQuery, setSearchQuery] = useState("");
+const Table = ({ data, visibleColumns, searchQuery }: Props) => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortColumn, setSortColumn] = useState<number | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [visibleColumns, setVisibleColumns] = useState(() =>
-    data.columns.reduce(
-      (acc: Record<string, boolean>, col: string, index: number) => {
-        const defaultSelectedColumns = [
-          "Label",
-          "Category",
-          "System Value",
-          "User Value",
-          "Note",
-        ];
 
-        acc[`column${index + 1}`] = defaultSelectedColumns.includes(col);
-        return acc;
-      },
-      {}
-    )
-  );
-
-  // Click checkbox to hide/show columns
-  const checkboxChange = (key: string) => {
-    setVisibleColumns((prev: Record<string, boolean>) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
-  // filtering based on searchbar
+  // filtering based on searchbar query
   const filteredRows = data.rows.filter((row) =>
     row.some((cell) =>
       cell.toString().toLowerCase().includes(searchQuery.toLowerCase())
@@ -57,7 +26,6 @@ const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
       setSortColumn(columnIndex);
       setSortOrder("asc");
     }
-    setCurrentPage(1);
   };
 
   const sortedRows = [...filteredRows].sort((a, b) => {
@@ -65,8 +33,6 @@ const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
 
     const valueA = a[sortColumn];
     const valueB = b[sortColumn];
-
-    if (valueA === null || valueB === null) return 0;
 
     if (typeof valueA === "string" && typeof valueB === "string") {
       if (sortOrder === "asc") {
@@ -84,13 +50,6 @@ const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
     }
     return 0;
   });
-
-  // Number of items to be displayed per page
-  const handleItemsPerPageChange = (selected: string) => {
-    const items = parseInt(selected.split(" ")[0], 10);
-    setItemsPerPage(items);
-    setCurrentPage(1);
-  };
 
   // Any matches from the Search Bar are highlighed in yellow
   const highlight = (text: string, query: string): React.ReactNode => {
@@ -112,25 +71,6 @@ const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
 
   return (
     <div>
-      <div className="table-header">
-        <div className="checkbox-group">
-          {data.columns.map((column: string, index: number) => (
-            <Checkbox
-              key={`column${index + 1}`}
-              label={column}
-              checked={visibleColumns[`column${index + 1}`]}
-              onChange={() => checkboxChange(`column${index + 1}`)}
-            />
-          ))}
-        </div>
-        <SearchBar
-          query={searchQuery}
-          setQuery={setSearchQuery}
-          placeholder="Search anything"
-          mode="type"
-        />
-      </div>
-
       {sortedRows.length > 0 ? (
         <table className="table">
           <thead>
@@ -187,25 +127,20 @@ const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {sortedRows
-              .slice(
-                (currentPage - 1) * itemsPerPage,
-                currentPage * itemsPerPage
-              )
-              .map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  {row.map(
-                    (cell, cellIndex) =>
-                      visibleColumns[`column${cellIndex + 1}`] && (
-                        <td key={cellIndex}>
-                          {typeof cell === "string" || typeof cell === "number"
-                            ? highlight(cell.toString(), searchQuery)
-                            : cell}
-                        </td>
-                      )
-                  )}
-                </tr>
-              ))}
+            {sortedRows.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {row.map(
+                  (cell, cellIndex) =>
+                    visibleColumns[`column${cellIndex + 1}`] && (
+                      <td key={cellIndex}>
+                        {typeof cell === "string" || typeof cell === "number"
+                          ? highlight(cell.toString(), searchQuery)
+                          : cell}
+                      </td>
+                    )
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       ) : (
@@ -231,43 +166,6 @@ const Table = ({ data, totalRecordCount, paginationItems }: Props) => {
           </tbody>
         </table>
       )}
-
-      {/* Pagination */}
-      <div className="pagination">
-        <div></div>
-        <div className="pagination-center">
-          <Button
-            text="Prev"
-            arrow="left"
-            isDisabled={currentPage === 1}
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          />
-          <span> {currentPage}</span>
-
-          <Button
-            text="Next"
-            arrow="right"
-            isDisabled={
-              currentPage === Math.ceil(totalRecordCount / itemsPerPage)
-            }
-            onClick={() =>
-              setCurrentPage((prev) =>
-                Math.min(prev + 1, Math.ceil(totalRecordCount / itemsPerPage))
-              )
-            }
-          />
-        </div>
-        <select
-          value={`${itemsPerPage} per page`}
-          onChange={(e) => handleItemsPerPageChange(e.target.value)}
-        >
-          {paginationItems.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </div>
     </div>
   );
 };

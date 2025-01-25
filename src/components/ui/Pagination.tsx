@@ -3,7 +3,7 @@ import Button from "./Button";
 
 type PaginationProps = {
   currentPage: number;
-  totalRecordCount: number;
+  totalPages: number;
   itemsPerPage: number;
   paginationItems: string[];
   onPageChange: (newPage: number) => void;
@@ -12,32 +12,33 @@ type PaginationProps = {
 
 const Pagination = ({
   currentPage,
-  totalRecordCount,
+  totalPages,
   itemsPerPage,
   paginationItems,
   onPageChange,
   onItemsPerPageChange,
 }: PaginationProps) => {
-  const totalPages = Math.ceil(totalRecordCount / itemsPerPage);
-
   return (
     <div className="pagination">
+      {/* 1st Item */}
       <div></div>
+      {/* 2nd Item */}
       <div className="pagination-center">
         <Button
           text="Prev"
           arrow="left"
           isDisabled={currentPage === 1}
-          onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
+          onClick={() => onPageChange(currentPage - 1)}
         />
         <span>{currentPage}</span>
         <Button
           text="Next"
           arrow="right"
           isDisabled={currentPage === totalPages}
-          onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
+          onClick={() => onPageChange(currentPage + 1)}
         />
       </div>
+      {/* 3rd Item */}
       <select
         value={`${itemsPerPage} per page`}
         onChange={(e) => onItemsPerPageChange(e.target.value)}

@@ -5,13 +5,6 @@
   width: 100%;
 }
 
-.table-header {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem;
-  margin-right: -0.5rem;
-}
-
 .sortable-column .arrow {
   display: inline-flex;
   align-items: center;
