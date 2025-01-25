@@ -5,6 +5,7 @@
   padding: 0.5rem;
   margin-top: 0.5rem;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .pagination-center {
@@ -26,21 +27,13 @@
 }
 
 .pagination select {
-  flex-shrink: 0;
+  margin-top: 0.5rem;
   cursor: pointer;
-}
-
-.pagination select {
   flex-shrink: 0;
 }
 
 @media (max-width: 1024px) {
   .pagination {
-    flex-direction: column;
     align-items: center;
-  }
-
-  .pagination select {
-    margin-top: 0.5rem;
   }
 }

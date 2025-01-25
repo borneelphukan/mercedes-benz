@@ -114,6 +114,11 @@ const Home = () => {
   return (
     <div className={`home-container ${theme}`}>
       <div className="filter-container">
+        <SearchBar
+          query={searchQuery}
+          setQuery={setSearchQuery}
+          placeholder="Search"
+        />
         <div className="checkbox-group">
           {data?.columns.map((column, index) => (
             <Checkbox
@@ -124,12 +129,6 @@ const Home = () => {
             />
           ))}
         </div>
-        <SearchBar
-          query={searchQuery}
-          setQuery={setSearchQuery}
-          placeholder="Search"
-          mode="type"
-        />
       </div>
 
       <div className="home-content">

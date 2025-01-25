@@ -1,5 +1,6 @@
 import "../../styles/ui/Pagination.css";
 import Button from "./Button";
+import Dropdown from "./Dropdown";
 
 type PaginationProps = {
   currentPage: number;
@@ -39,16 +40,11 @@ const Pagination = ({
         />
       </div>
       {/* 3rd Item */}
-      <select
-        value={`${itemsPerPage} per page`}
-        onChange={(e) => onItemsPerPageChange(e.target.value)}
-      >
-        {paginationItems.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+      <Dropdown
+        items={paginationItems}
+        selectedItem={`${itemsPerPage} per page`}
+        onChange={onItemsPerPageChange}
+      />
     </div>
   );
 };
