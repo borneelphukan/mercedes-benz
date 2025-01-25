@@ -2,7 +2,7 @@ import "../../styles/ui/Pagination.css";
 import Button from "./Button";
 import Dropdown from "./Dropdown";
 
-type PaginationProps = {
+type Props = {
   currentPage: number;
   totalPages: number;
   itemsPerPage: number;
@@ -18,7 +18,7 @@ const Pagination = ({
   paginationItems,
   onPageChange,
   onItemsPerPageChange,
-}: PaginationProps) => {
+}: Props) => {
   return (
     <div className="pagination">
       {/* 1st Item */}

@@ -18,7 +18,7 @@ const Home = () => {
   );
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [selectedCategory, setSelectedCategory] = useState<string>(""); // State for selected category
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const paginationItems = ["5 per page", "10 per page", "15 per page"];
@@ -113,6 +113,11 @@ const Home = () => {
       }
     : null;
 
+  // Check if any column is selected
+  const noVisibleColumns = Object.values(visibleColumns).every(
+    (isVisible) => !isVisible
+  );
+
   if (error) {
     return (
       <div className={`home-container ${theme}`}>
@@ -133,6 +138,7 @@ const Home = () => {
           />
         </div>
         <div className="checkbox-group">
+          {/* Section A */}
           {data?.columns.map((column, index) => (
             <Checkbox
               key={`column${index + 1}`}
@@ -144,8 +150,15 @@ const Home = () => {
         </div>
       </div>
 
+      {/* When no Checkboxes are selected in Section A */}
+      {noVisibleColumns && (
+        <div className="alert-message">
+          ⚠️ Please select at least one column to display the table.
+        </div>
+      )}
+
       <div className="home-content">
-        {paginatedData && (
+        {paginatedData && !noVisibleColumns && (
           <Table
             data={paginatedData}
             visibleColumns={visibleColumns}
@@ -154,7 +167,8 @@ const Home = () => {
         )}
       </div>
 
-      {data && (
+      {/* Data and columns present */}
+      {data && !noVisibleColumns && (
         <div className="pagination-container">
           <Pagination
             currentPage={currentPage}
