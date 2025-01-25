@@ -31,9 +31,3 @@
   cursor: pointer;
   flex-shrink: 0;
 }
-
-@media (max-width: 1024px) {
-  .pagination {
-    align-items: center;
-  }
-}

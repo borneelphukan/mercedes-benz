@@ -5,6 +5,7 @@ import Table from "../components/ui/Table";
 import Pagination from "../components/ui/Pagination";
 import SearchBar from "../components/ui/SearchBar";
 import Checkbox from "../components/ui/Checkbox";
+import Category from "../components/ui/Category";
 
 const Home = () => {
   const { theme } = useTheme();
@@ -17,6 +18,7 @@ const Home = () => {
   );
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [selectedCategory, setSelectedCategory] = useState<string>(""); // State for selected category
   const [error, setError] = useState<string | null>(null);
 
   const paginationItems = ["5 per page", "10 per page", "15 per page"];
@@ -76,6 +78,11 @@ const Home = () => {
     fetchData();
   }, []);
 
+  // categoryFilter
+  const categoryFilter = (category: string) => {
+    setSelectedCategory(category);
+  };
+
   const handleCheckboxChange = (key: string) => {
     setVisibleColumns((prev) => ({
       ...prev,
@@ -96,10 +103,13 @@ const Home = () => {
   const paginatedData = data
     ? {
         ...data,
-        rows: data.rows.slice(
-          (currentPage - 1) * itemsPerPage,
-          currentPage * itemsPerPage
-        ),
+        rows: data.rows
+          .filter(
+            (row) =>
+              !selectedCategory ||
+              row[data.columns.indexOf("Category")] === selectedCategory
+          )
+          .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage),
       }
     : null;
 
@@ -114,11 +124,14 @@ const Home = () => {
   return (
     <div className={`home-container ${theme}`}>
       <div className="filter-container">
-        <SearchBar
-          query={searchQuery}
-          setQuery={setSearchQuery}
-          placeholder="Search"
-        />
+        <div className="filter-row">
+          <Category data={data} onCategoryChange={categoryFilter} />
+          <SearchBar
+            query={searchQuery}
+            setQuery={setSearchQuery}
+            placeholder="Search"
+          />
+        </div>
         <div className="checkbox-group">
           {data?.columns.map((column, index) => (
             <Checkbox
@@ -145,7 +158,13 @@ const Home = () => {
         <div className="pagination-container">
           <Pagination
             currentPage={currentPage}
-            totalPages={Math.ceil(data.rows.length / itemsPerPage)}
+            totalPages={Math.ceil(
+              data.rows.filter(
+                (row) =>
+                  !selectedCategory ||
+                  row[data.columns.indexOf("Category")] === selectedCategory
+              ).length / itemsPerPage
+            )}
             itemsPerPage={itemsPerPage}
             paginationItems={paginationItems}
             onPageChange={handlePageChange}

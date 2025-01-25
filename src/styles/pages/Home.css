@@ -2,10 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
   padding: 0.5rem 1rem;
   margin: auto;
   width: 100%;
   box-sizing: border-box;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .checkbox-group {
@@ -37,15 +47,13 @@
   }
 }
 
-/* Tablet screen */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .checkbox-group {
-    grid-template-columns: repeat(4, 1fr);
+/* Tablet screen or larger */
+@media (min-width: 768px) {
+  .filter-row {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
   }
-}
-
-/* Desktop screen */
-@media (min-width: 1024px) {
   .checkbox-group {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }

@@ -30,8 +30,8 @@
   --table-header-bg: #47464bb6;
   --odd-row-bg: #3b4252;
   --even-row-bg: #2d3748;
-  --dropdown-bg-color: #1a202c;
-  --border-color: #555555;
+  --dropdown-bg-color: #262d3c;
+  --border-color: transparent;
 }
 
 [data-theme="dark"] .navbar-logo img {
