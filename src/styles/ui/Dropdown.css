@@ -14,7 +14,7 @@
 .dropdown-select {
   width: 100%;
   padding: 0.5rem;
-  font-size: 1rem;
+  padding-right: 2rem;
   border: 0.5px solid var(--border-color);
   border-radius: 4px;
   background-color: var(--dropdown-bg-color);
