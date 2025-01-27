@@ -61,4 +61,8 @@
   .loader-overlay {
     background-color: var(--layout-bg-color);
   }
+
+  .loader {
+    filter: invert(1);
+  }
 }

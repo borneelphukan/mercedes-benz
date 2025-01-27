@@ -32,6 +32,7 @@ const Table = ({ data, visibleColumns, searchQuery }: Props) => {
     }
   };
 
+  // sorts data in ascending or descending, based on the column selected
   const sortedRows = [...filteredRows].sort((a, b) => {
     if (sortColumn === null) return 0;
 
