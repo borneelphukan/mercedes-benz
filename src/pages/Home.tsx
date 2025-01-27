@@ -163,7 +163,7 @@ const Home = () => {
         {paginatedData && !noColumnsShown && (
           <Table
             data={paginatedData}
-            visibleColumns={showColumns}
+            showColumns={showColumns}
             searchQuery={searchQuery}
           />
         )}

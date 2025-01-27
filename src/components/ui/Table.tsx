@@ -3,11 +3,11 @@ import "../../styles/ui/Table.css";
 
 type Props = {
   data: { columns: string[]; rows: any[][] };
-  visibleColumns: Record<string, boolean>;
+  showColumns: Record<string, boolean>;
   searchQuery: string;
 };
 
-const Table = ({ data, visibleColumns, searchQuery }: Props) => {
+const Table = ({ data, showColumns, searchQuery }: Props) => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortColumn, setSortColumn] = useState<number | null>(null);
 
@@ -83,7 +83,7 @@ const Table = ({ data, visibleColumns, searchQuery }: Props) => {
           <tr>
             {data.columns.map(
               (column, index) =>
-                visibleColumns[`column${index + 1}`] && (
+                showColumns[`column${index + 1}`] && (
                   <th
                     key={index}
                     onClick={() => toggleSort(index)}
@@ -124,9 +124,11 @@ const Table = ({ data, visibleColumns, searchQuery }: Props) => {
               <tr key={rowIndex}>
                 {row.map(
                   (cell, cellIndex) =>
-                    visibleColumns[`column${cellIndex + 1}`] && (
+                    showColumns[`column${cellIndex + 1}`] && (
                       <td key={cellIndex}>
-                        {typeof cell === "string" || typeof cell === "number" ? highlight(cell.toString(), searchQuery) : cell}
+                        {typeof cell === "string" || typeof cell === "number"
+                          ? highlight(cell.toString(), searchQuery)
+                          : cell}
                       </td>
                     )
                 )}
