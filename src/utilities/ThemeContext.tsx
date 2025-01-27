@@ -5,26 +5,34 @@ type ThemeContextType = {
   toggleTheme: () => void;
 };
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 type Props = {
   children: React.ReactNode;
 };
 
-export function ThemeProvider({ children }: Props) {
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "light"
-  );
+function ThemeProvider({ children }: Props) {
+  const [theme, setTheme] = useState<string>("light");
 
+  // Checks theme in localStorage and sets the theme in the state
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  // Applies and updates the theme in the frontend
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    document.body.style.backgroundColor =
-      theme === "light" ? "#ffffff" : "#2d3748";
+    theme === "light" ? "#ffffff" : "#2d3748";
     localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => {
+      return prevTheme === "light" ? "dark" : "light";
+    });
   };
 
   return (
@@ -34,10 +42,13 @@ export function ThemeProvider({ children }: Props) {
   );
 }
 
-export function useTheme(): ThemeContextType {
+// Custom Hook to access ThemeContext
+const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;
-}
+};
+
+export { ThemeProvider, useTheme };

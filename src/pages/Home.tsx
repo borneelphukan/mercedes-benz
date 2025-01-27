@@ -152,8 +152,8 @@ const Home = () => {
 
       {/* When no Checkboxes are selected in Section A */}
       {noVisibleColumns && (
-        <div className="alert-message">
-          ⚠️ Please select at least one column to display the table.
+        <div className="no-data">
+          Please select at least one column to display the table.
         </div>
       )}
 

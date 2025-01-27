@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/ui/Category.css";
 
 type Props = {
   data: { columns: string[]; rows: any[][] } | null;
   onCategoryChange: (selectedCategory: string) => void;
-}
+};
 
 function Category({ data, onCategoryChange }: Props) {
   const [categories, setCategories] = useState<string[]>([]);
 
-  // filters category data when implemented
   useEffect(() => {
     if (data) {
       const categoryIndex = data.columns.indexOf("Category");
       if (categoryIndex !== -1) {
-        const uniqueCategories = Array.from(
-          new Set(data.rows.map((row) => row[categoryIndex]))
-        );
+        const uniqueCategories = [
+          ...new Set(data.rows.map((row) => row[categoryIndex])),
+        ];
         setCategories(uniqueCategories);
       }
     }
   }, [data]);
-
-  const handleCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    onCategoryChange(event.target.value);
-  };
 
   return (
     <div className="category-container">
@@ -34,7 +27,7 @@ function Category({ data, onCategoryChange }: Props) {
         <select
           id="category-select"
           className="category-dropdown"
-          onChange={handleCategoryChange}
+          onChange={(e) => onCategoryChange(e.target.value)}
         >
           <option value="">Select Category</option>
           {categories.map((category, index) => (

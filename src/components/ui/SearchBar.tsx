@@ -8,22 +8,22 @@ type Props = {
 
 const SearchBar = ({ query, setQuery, placeholder = "" }: Props) => {
   return (
-    <div className="search-bar-container">
+    <div className="search-container">
       <input
         type="text"
         value={query}
         placeholder={placeholder}
-        className="search-bar-input"
+        className="search-input"
         onChange={(e) => setQuery(e.target.value)}
       />
-      <div className="search-bar-button" aria-label="Search">
+      <div className="search-button" aria-label="Search">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="search-bar-icon"
+          className="search-icon"
         >
           <path
             strokeLinecap="round"

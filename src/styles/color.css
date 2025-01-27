@@ -34,25 +34,31 @@
   --border-color: transparent;
 }
 
-[data-theme="dark"] .navbar-logo img {
-  filter: invert(1);
-}
+[data-theme="dark"] {
+  .navbar-logo img {
+    filter: invert(1);
+  }
 
-[data-theme="dark"] .table th:hover {
-  background-color: #5a6474;
-  color: #fff;
-}
+  .table th:hover {
+    background-color: #5a6474;
+    color: #fff;
+  }
 
-[data-theme="dark"] .table th:focus {
-  background-color: #2d3748;
-  outline: 2px solid #3182ce;
-  color: #fff;
-}
+  .table th:focus {
+    background-color: #2d3748;
+    outline: 2px solid #3182ce;
+    color: #fff;
+  }
 
-[data-theme="dark"] .theme-toggle-switch {
-  background-color: #3b4552;
-}
+  .theme-toggle-switch {
+    background-color: #3b4552;
+  }
 
-[data-theme="dark"] .theme-toggle-switch .icon {
-  left: 5px;
+  .theme-toggle-switch .icon {
+    left: 5px;
+  }
+
+  .loader-overlay {
+    background-color: var(--layout-bg-color);
+  }
 }

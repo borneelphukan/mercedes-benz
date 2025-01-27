@@ -1,10 +1,10 @@
-.search-bar-container {
+.search-container {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.search-bar-input {
+.search-input {
   width: 100%;
   padding: 8px 16px;
   border: 1px solid var(--border-color);
@@ -13,18 +13,18 @@
   outline: none;
 }
 
-.search-bar-input:focus {
+.search-input:focus {
   border-color: var(--border-color);
 }
 
-.search-bar-button {
+.search-button {
   position: absolute;
   right: 16px;
   display: flex;
   align-items: center;
 }
 
-.search-bar-icon {
+.search-icon {
   width: 20px;
   height: 20px;
   stroke: #333;

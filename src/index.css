@@ -104,3 +104,12 @@ td {
   text-align: center;
   padding: 2rem 1.5rem;
 }
+
+.no-data {
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: #999999;
+}

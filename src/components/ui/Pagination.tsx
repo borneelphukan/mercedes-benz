@@ -19,27 +19,36 @@ const Pagination = ({
   onPageChange,
   onItemsPerPageChange,
 }: Props) => {
+  // Previous Button
+  const Previous = () => {
+    if (currentPage > 1) onPageChange(currentPage - 1);
+  };
+
+  // Next Button
+  const Next = () => {
+    if (currentPage < totalPages) onPageChange(currentPage + 1);
+  };
+
   return (
     <div className="pagination">
-      {/* 1st Item */}
-      <div></div>
-      {/* 2nd Item */}
+      {/* Previous and Next Buttons */}
       <div className="pagination-center">
         <Button
           text="Prev"
           arrow="left"
           isDisabled={currentPage === 1}
-          onClick={() => onPageChange(currentPage - 1)}
+          onClick={Previous}
         />
         <span>{currentPage}</span>
         <Button
           text="Next"
           arrow="right"
           isDisabled={currentPage === totalPages}
-          onClick={() => onPageChange(currentPage + 1)}
+          onClick={Next}
         />
       </div>
-      {/* 3rd Item */}
+
+      {/* Items per Page Dropdown */}
       <Dropdown
         items={paginationItems}
         selectedItem={`${itemsPerPage} per page`}
