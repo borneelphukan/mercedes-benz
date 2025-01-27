@@ -32,39 +32,22 @@ function Category({ data, onCategoryChange }: Props) {
   };
 
   return (
-    <div className="category-container">
-      <div
-        className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}
-        onClick={toggleDropdown}
+    <div
+      className={`dropdown-wrapper ${isDropdownOpen ? "open" : ""}`}
+      onClick={toggleDropdown}
+    >
+      <select
+        id="category-select"
+        className="dropdown-select"
+        onChange={change}
       >
-        <select
-          id="category-select"
-          className="dropdown-select"
-          onChange={change}
-        >
-          <option value="">Select Category</option>
-          {categories.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-        <div className="dropdown-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m19.5 8.25-7.5 7.5-7.5-7.5"
-            />
-          </svg>
-        </div>
-      </div>
+        <option value="">Select Category</option>
+        {categories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

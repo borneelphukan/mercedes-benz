@@ -7,6 +7,7 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="navbar-logo">
           <img src="mercedes-benz.svg" alt="Mercedes-Benz Logo" />
+          <span className="navbar-text">Mercedes Benz</span>
         </div>
         <ThemeSwitch />
       </div>

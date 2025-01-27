@@ -27,7 +27,6 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
 
   const paginationItems = ["5 per page", "10 per page", "15 per page"];
   const noColumnsShown = Object.values(showColumns).every(
@@ -80,7 +79,7 @@ const Home = () => {
           }, {})
         );
       } catch (err: any) {
-        setError(err.message);
+        console.log(err);
       }
     };
 
@@ -126,14 +125,6 @@ const Home = () => {
     };
   } else {
     paginatedData = null;
-  }
-
-  if (error) {
-    return (
-      <div className={`home-container ${theme}`}>
-        <div className="error"> Error: {error}</div>
-      </div>
-    );
   }
 
   return (
