@@ -7,32 +7,41 @@ import SearchBar from "../components/ui/SearchBar";
 import Checkbox from "../components/ui/Checkbox";
 import Category from "../components/ui/Category";
 
+type RowItem = {
+  id: number;
+  name: string;
+  label: string;
+  category: string;
+  system_value: string | number;
+  user_value: string | number;
+  note: string;
+};
+
 const Home = () => {
   const { theme } = useTheme();
   const [data, setData] = useState<{ columns: string[]; rows: any[][] } | null>(
     null
   );
   const [searchQuery, setSearchQuery] = useState("");
-  const [visibleColumns, setVisibleColumns] = useState<Record<string, boolean>>(
-    {}
-  );
+  const [showColumns, setShowColumns] = useState<Record<string, boolean>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const paginationItems = ["5 per page", "10 per page", "15 per page"];
+  const noColumnsShown = Object.values(showColumns).every(
+    (isVisible) => !isVisible
+  );
 
+  // Fetch data from data.json
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("data/data.json");
-        if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.status}`);
-        }
         const json = await response.json();
 
-        const defaultSelectedColumns = [
+        const defaultColumns = [
           "Label",
           "Category",
           "System Value",
@@ -50,7 +59,7 @@ const Home = () => {
             "User Value",
             "Note",
           ],
-          rows: json.data.map((item: any) => [
+          rows: json.data.map((item: RowItem) => [
             item.id,
             item.name,
             item.label,
@@ -63,10 +72,10 @@ const Home = () => {
 
         setData(data);
 
-        // Initialize visible columns
-        setVisibleColumns(
+        // Set default visible columns
+        setShowColumns(
           data.columns.reduce((acc: Record<string, boolean>, col, index) => {
-            acc[`column${index + 1}`] = defaultSelectedColumns.includes(col);
+            acc[`column${index + 1}`] = defaultColumns.includes(col);
             return acc;
           }, {})
         );
@@ -78,50 +87,51 @@ const Home = () => {
     fetchData();
   }, []);
 
-  // categoryFilter
+  // filter items through category (mandatory function)
   const categoryFilter = (category: string) => {
     setSelectedCategory(category);
   };
 
-  const handleCheckboxChange = (key: string) => {
-    setVisibleColumns((prev) => ({
+  // checkboxes for showing / hiding columns
+  const changeCheckbox = (key: string) => {
+    setShowColumns((prev) => ({
       ...prev,
       [key]: !prev[key],
     }));
   };
 
-  const handlePageChange = (newPage: number) => {
+  // Pagination functions
+  const changePage = (newPage: number) => {
     setCurrentPage(newPage);
   };
 
-  const handleItemsPerPageChange = (selected: string) => {
+  const changePaginationLimit = (selected: string) => {
     const items = parseInt(selected.split(" ")[0], 10);
     setItemsPerPage(items);
     setCurrentPage(1);
   };
 
-  const paginatedData = data
-    ? {
-        ...data,
-        rows: data.rows
-          .filter(
-            (row) =>
-              !selectedCategory ||
-              row[data.columns.indexOf("Category")] === selectedCategory
-          )
-          .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage),
-      }
-    : null;
+  let paginatedData;
 
-  // Check if any column is selected
-  const noVisibleColumns = Object.values(visibleColumns).every(
-    (isVisible) => !isVisible
-  );
+  if (data) {
+    paginatedData = {
+      ...data,
+      rows: data.rows
+        .filter(
+          (row) =>
+            !selectedCategory ||
+            row[data.columns.indexOf("Category")] === selectedCategory
+        )
+        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage),
+    };
+  } else {
+    paginatedData = null;
+  }
 
   if (error) {
     return (
       <div className={`home-container ${theme}`}>
-        <div className="error">⚠️ Error: {error}</div>
+        <div className="error"> Error: {error}</div>
       </div>
     );
   }
@@ -129,6 +139,7 @@ const Home = () => {
   return (
     <div className={`home-container ${theme}`}>
       <div className="filter-container">
+        {/* Category and Searchbar */}
         <div className="filter-row">
           <Category data={data} onCategoryChange={categoryFilter} />
           <SearchBar
@@ -137,38 +148,38 @@ const Home = () => {
             placeholder="Search"
           />
         </div>
+        {/* Checkboxes */}
         <div className="checkbox-group">
-          {/* Section A */}
           {data?.columns.map((column, index) => (
             <Checkbox
               key={`column${index + 1}`}
               label={column}
-              checked={visibleColumns[`column${index + 1}`]}
-              onChange={() => handleCheckboxChange(`column${index + 1}`)}
+              checked={showColumns[`column${index + 1}`]}
+              onChange={() => changeCheckbox(`column${index + 1}`)}
             />
           ))}
         </div>
       </div>
 
-      {/* When no Checkboxes are selected in Section A */}
-      {noVisibleColumns && (
+      {/* If no columns are selected */}
+      {noColumnsShown && (
         <div className="no-data">
           Please select at least one column to display the table.
         </div>
       )}
 
       <div className="home-content">
-        {paginatedData && !noVisibleColumns && (
+        {paginatedData && !noColumnsShown && (
           <Table
             data={paginatedData}
-            visibleColumns={visibleColumns}
+            visibleColumns={showColumns}
             searchQuery={searchQuery}
           />
         )}
       </div>
 
       {/* Data and columns present */}
-      {data && !noVisibleColumns && (
+      {data && !noColumnsShown && (
         <div className="pagination-container">
           <Pagination
             currentPage={currentPage}
@@ -181,8 +192,8 @@ const Home = () => {
             )}
             itemsPerPage={itemsPerPage}
             paginationItems={paginationItems}
-            onPageChange={handlePageChange}
-            onItemsPerPageChange={handleItemsPerPageChange}
+            onPageChange={changePage}
+            onLimitChange={changePaginationLimit}
           />
         </div>
       )}

@@ -1,12 +1,12 @@
 import "../../styles/ui/Dropdown.css";
 
-type DropdownProps = {
+type Props = {
   items: string[];
   selectedItem: string;
   onChange: (selected: string) => void;
 };
 
-const Dropdown = ({ items, selectedItem, onChange }: DropdownProps) => {
+const Dropdown = ({ items, selectedItem, onChange }: Props) => {
   return (
     <div className="dropdown">
       <div className="dropdown-wrapper">

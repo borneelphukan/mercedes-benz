@@ -22,35 +22,33 @@ function Category({ data, onCategoryChange }: Props) {
   }, [data]);
 
   return (
-    <div className="category-container">
-      <div className="dropdown-wrapper">
-        <select
-          id="category-select"
-          className="category-dropdown"
-          onChange={(e) => onCategoryChange(e.target.value)}
-        >
-          <option value="">Select Category</option>
-          {categories.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="dropdown-icon"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m19.5 8.25-7.5 7.5-7.5-7.5"
-          />
-        </svg>
-      </div>
+    <div>
+      <select
+        id="category-select"
+        className="category-dropdown"
+        onChange={(e) => onCategoryChange(e.target.value)}
+      >
+        <option value="">Select Category</option>
+        {categories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        className="dropdown-icon"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="m19.5 8.25-7.5 7.5-7.5-7.5"
+        />
+      </svg>
     </div>
   );
 }

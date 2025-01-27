@@ -8,7 +8,7 @@ type Props = {
   itemsPerPage: number;
   paginationItems: string[];
   onPageChange: (newPage: number) => void;
-  onItemsPerPageChange: (selected: string) => void;
+  onLimitChange: (selected: string) => void;
 };
 
 const Pagination = ({
@@ -17,7 +17,7 @@ const Pagination = ({
   itemsPerPage,
   paginationItems,
   onPageChange,
-  onItemsPerPageChange,
+  onLimitChange,
 }: Props) => {
   // Previous Button
   const Previous = () => {
@@ -52,7 +52,7 @@ const Pagination = ({
       <Dropdown
         items={paginationItems}
         selectedItem={`${itemsPerPage} per page`}
-        onChange={onItemsPerPageChange}
+        onChange={onLimitChange}
       />
     </div>
   );

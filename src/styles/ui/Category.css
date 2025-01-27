@@ -1,23 +1,10 @@
-.category-container {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  max-width: 200px;
-}
-
-.dropdown-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
 .category-dropdown {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
+  background-color: var(--dropdown-bg-color);
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  background-color: var(--dropdown-bg-color);
   color: var(--text-color);
   cursor: pointer;
   appearance: none;
