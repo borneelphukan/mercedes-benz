@@ -11,15 +11,16 @@ const Table = ({ data, showColumns, searchQuery }: Props) => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortColumn, setSortColumn] = useState<number | null>(null);
 
-  // filtering based on searchbar query
+  // searching based on searchbar query ()
   const filteredRows = data.rows.filter((row) =>
     row.some((cell) =>
       cell.toString().toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
 
-  // sorting
+  // sorting column header
   const toggleSort = (columnIndex: number) => {
+    // For the user-selected column
     if (sortColumn === columnIndex) {
       if (sortOrder === "asc") {
         setSortOrder("desc");
@@ -32,7 +33,7 @@ const Table = ({ data, showColumns, searchQuery }: Props) => {
     }
   };
 
-  // sorts data in ascending or descending, based on the column selected
+  // sorting column data (madatory)
   const sortedRows = [...filteredRows].sort((a, b) => {
     if (sortColumn === null) return 0;
 
@@ -60,7 +61,7 @@ const Table = ({ data, showColumns, searchQuery }: Props) => {
   const highlight = (text: string, query: string): React.ReactNode => {
     if (!query) return text;
 
-    const regex = new RegExp(`(${query})`, "gi");
+    const regex = new RegExp(`(${query})`, "gi"); // gi -> case-insensitive regex
     const parts = text.split(regex);
 
     return parts.map((part, index) => {
@@ -89,6 +90,7 @@ const Table = ({ data, showColumns, searchQuery }: Props) => {
                     onClick={() => toggleSort(index)}
                     className="sortable-column"
                   >
+                    {/* Columns */}
                     <div className="header-content">
                       <span>{column}</span>
                       {sortColumn === index && (

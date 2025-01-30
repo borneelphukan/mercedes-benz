@@ -6,7 +6,7 @@ type Props = {
   placeholder: string;
 };
 
-const SearchBar = ({ query, setQuery, placeholder = "" }: Props) => {
+const SearchBar = ({ query, setQuery, placeholder }: Props) => {
   return (
     <div className="search-container">
       <input

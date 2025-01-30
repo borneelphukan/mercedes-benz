@@ -112,7 +112,9 @@ const Home = () => {
 
   let paginatedData;
 
+  // Filter by Category
   if (data) {
+    // filter and paginate
     paginatedData = {
       ...data,
       rows: data.rows
@@ -159,8 +161,10 @@ const Home = () => {
         </div>
       )}
 
+      {/* Table */}
       <div className="home-content">
         {paginatedData && !noColumnsShown && (
+          // Show/Hide columns; Search Query -> In Home.tsx; Sort -> Table.tsx
           <Table
             data={paginatedData}
             showColumns={showColumns}

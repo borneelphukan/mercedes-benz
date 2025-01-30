@@ -36,6 +36,7 @@ function ThemeProvider({ children }: Props) {
   };
 
   return (
+    // theme, toggleTheme are the shared states being accessed
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>

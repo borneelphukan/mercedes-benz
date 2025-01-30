@@ -13,6 +13,7 @@ function Category({ data, onCategoryChange }: Props) {
   useEffect(() => {
     if (data) {
       const categoryIndex = data.columns.indexOf("Category");
+      // Only if some category is selected
       if (categoryIndex !== -1) {
         const uniqueCategories = [
           ...new Set(data.rows.map((row) => row[categoryIndex])),
@@ -41,6 +42,7 @@ function Category({ data, onCategoryChange }: Props) {
         className="dropdown-select"
         onChange={change}
       >
+        {/* Fetch categories from data.json */}
         <option value="">Select Category</option>
         {categories.map((category, index) => (
           <option key={index} value={category}>
